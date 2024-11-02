@@ -15,16 +15,13 @@ while hash_alg not in ["MD5", "SHA1", "SHA256"]:
 FOUND = False
 with open("milw0rm-dictionary.txt", "r", encoding="UTF-8") as wordlist:
     for index, word in enumerate(wordlist):
-        word = word.strip()  # Remove whitespace
-        
-        # Fix: Properly call encode() and hexdigest()
+        word = word.strip()
         if hash_alg == "MD5":
             hashed_word = hashlib.md5(word.encode('utf-8')).hexdigest()
         elif hash_alg == "SHA1":
             hashed_word = hashlib.sha1(word.encode('utf-8')).hexdigest()
-        else:  # SHA256
+        else: 
             hashed_word = hashlib.sha256(word.encode('utf-8')).hexdigest()
-            
         if hash_input == hashed_word:
             print(f"Password Found: {word}")
             FOUND = True
